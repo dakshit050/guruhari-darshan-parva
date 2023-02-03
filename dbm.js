@@ -62,6 +62,8 @@ async function markAttendanceManually(payload){
             let attendance = Attendance();
             attendance.name=name;
             attendance.phoneNumber=phoneNumber;
+            attendance.sabha=sabha;
+            attendance.reference=reference;
             return await attendance.save();
         }
     }catch(e){

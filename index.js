@@ -23,7 +23,7 @@ app.post('/attendance', async (req, res) => {
     try{
         const result= await dbm.markAttendanceManually(req.body);
         if(result==="Present"){
-            return res.status(402).send("This phone number is already registerd");
+            return res.status(200).json(result);
         }
         return res.status(200).json(result);
     }catch(e){
@@ -46,7 +46,7 @@ app.get('/:id', async (req, res) => {
     try{
         const result= await dbm.findAttendance(id);
         if(result){
-            return res.status(200).send();
+            return res.status(200).json(result);
         }
         return res.status(404).send();
     }catch(e){

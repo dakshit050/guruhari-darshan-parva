@@ -4,7 +4,9 @@ const {uuid} = require('uuidv4');
 const attendanceSchema= new mongoose.Schema({
     uuid:{type:String,default:uuid},
     name:{type:String},
-    phoneNumber:{type:String,index: { unique: true }}
+    phoneNumber:{type:String,index: { unique: true }},
+    sabha:{type:String,default:""},
+    reference:{type:String,default:""}
 });
 
 

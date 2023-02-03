@@ -43,21 +43,21 @@ mongoose.connect(
 async function findAttendance(Id){
     try{
         let result=await Attendance.findOne({"uuid":Id});
-        if(result!==null){
-            return true;
-        }
-        return false;
+        return result;
     }catch(e){
         throw e;
     }
 }
 
 async function markAttendanceManually(payload){
-    const {name,phoneNumber}=payload;
+    const {name,phoneNumber,sabha,reference}=payload;
     try{
         let isPresent= await Attendance.findOne({"phoneNumber":phoneNumber});
         if(isPresent!==null){
-           return "Present";
+            isPresent.sabha=sabha;
+            isPresent.reference=reference;
+            await isPresent.save();
+            return "Present";
         }else{
             let attendance = Attendance();
             attendance.name=name;
